@@ -1,3 +1,17 @@
+(function($) {
+    $.fn.goTo = function(yOffset) {
+    	if($(this).length == 0) return;
+    	if(!yOffset) yOffset = 0;
+    	var topOffset = $(this).offset().top + yOffset;
+    	console.log(topOffset);
+    	
+        $('html, body').animate({
+            scrollTop: topOffset + 'px'
+        }, 'fast');
+        return this; // for chaining...
+    };
+})(jQuery);
+
 $(function() {
 	
 	
@@ -47,6 +61,7 @@ $(function() {
 				$("#input-search").bind("keypress",search);
 				
 				$("#input-search").focus();
+				window.setTimeout("$('.scrollTo').goTo()", -50);
 			});
 		});
 	}
@@ -123,4 +138,6 @@ $(function() {
 	function scrollToTop() {
 		$("html, body").animate({ scrollTop: 200 }, "fast");
 	}
+	
+	window.setTimeout("$('.scrollTo').goTo()", -50);
 });

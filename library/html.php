@@ -54,7 +54,7 @@ function simpleFormat($text) {
 		"###listend###" => "</ul>",
 		"###listitemstart###" => "<li>",
 		"###listitemend###" => "</li>",
-		"###pagebreak###" => "<br>",
+		"###break###" => "<br>",
 		"###strongstart###" => "<strong>",
 		"###strongend###" => "</strong>"
 	);

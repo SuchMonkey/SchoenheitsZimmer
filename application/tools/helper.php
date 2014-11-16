@@ -20,7 +20,6 @@ class Helper extends Model {
 		//home
 		$links[] = array("Home", "home", "homeAjax");
 		//therapies
-		$links[] = array("Behandlungen", "therapy", "categoryAjax");
 		foreach($this->getCategoriesForUrl() as $category) {
 			$links[] = array($category["name"], "therapy", "categoryAjax", $category["name"]);
 			foreach($this->getTherapiesForUrl($category["name"]) as $therapyUnit) {
@@ -33,6 +32,10 @@ class Helper extends Model {
 		$links[] = array("Gallerie", "gallery", "galleryAjax");
 		//price
 		$links[] = array("Preise", "price", "categoryAjax");
+		foreach($this->getCategoriesForUrl() as $category) {
+			$links[] = array($category["name"], "price", "categoryAjax", $category["name"]);
+			
+		}
 		//contact
 		$links[] = array("Kontakt", "contact", "contactAjax");
 		//opening

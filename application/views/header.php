@@ -5,7 +5,7 @@
 	$siteMapLinks = $helper -> getSiteMap();
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 	<head>
 		<meta charset="UTF-8">
 		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
@@ -28,5 +28,5 @@
 	<body>
 		<?php include(dirname(__FILE__).'/menu.php') ?>
 		<div class="container">
-			<div id="pageContent">
+			<div id="pageContent" class="content-pusher">
 		

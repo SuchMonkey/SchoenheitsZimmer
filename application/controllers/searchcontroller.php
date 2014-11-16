@@ -40,6 +40,7 @@ class SearchController extends Controller {
 			$this->set("searchResults", array());
 		}
 		
+		$this->set("generalInformation", $this->Search->getGeneralInformation());
 		$this->render($base, "search");
 	}
 	

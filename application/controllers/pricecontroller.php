@@ -12,9 +12,16 @@ class PriceController extends Controller {
 	
 	public function categoryX($category = null, $unit = null, $base = true) {
 		if (!is_null($category)) {
-			$this->set("category", $this->Price->getCategory($category));
-			$this->set("units", $this->Price->getUnits($category));
-			$this->set("extras", $this->Price->getExtras($category));
+			
+			$prices = array();
+			$pCategories = $this->Price->getCategories();
+			
+			foreach($pCategories as $pCategory) {
+				$prices[$pCategory["name"]] = $this->Price->getUnits($pCategory["name"]);
+			}
+			
+			$this->set("prices", $prices);
+			$this->set("clickedCategory", $category);
 			$this->render($base, "priceCategoryUnitList");
 		} else {
 			$this->set("categories", $this->Price->getCategories());

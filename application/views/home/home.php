@@ -6,8 +6,13 @@
 	</div>
 </div>
 <div class="row">
+	<div class="col-md-12">
+		<?php insertImage($generalInformation['imgName'], "img-responsive image-border"); ?>
+	</div>
+</div>
+<div class="row">
 	<div class="col-md-6">
-		<h3 class="excerpt"><?php echo $generalInformation["name"]; ?></h3>
+		<h4 class="excerpt"><?php echo $generalInformation["name"]; ?></h4>
 	</div>
 	<div class="col-md-6">
 		<?php insertImage($generalInformation['imgName'], "img-responsive image-border"); ?>
@@ -20,7 +25,7 @@
 			<div class="col-md-6">
 				<h4 class="kapitaelchen"><?php echo $section['name']; ?></h4>
 				<p>
-					<?php echo $section['text']; ?>
+					<?php simpleFormat($section['text']); ?>
 				</p>
 			</div>
 		<?php endfor; ?>

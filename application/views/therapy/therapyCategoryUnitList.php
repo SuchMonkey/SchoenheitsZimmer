@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<ol class="breadcrumb kapitaelchen">
-			<li><a href="<?php href('therapy', 'categoryAjax'); ?>">Behandlungen</a></li>
+			
 			<li class="active"><?php echo $category['name']; ?></li>
 		</ol>
 	</div>

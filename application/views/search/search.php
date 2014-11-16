@@ -6,7 +6,10 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-8 col-md-offset-2">
+	<div class="col-md-2">
+		<h2 class="kapitaelchen"><?php echo $generalInformation['name']; ?></h2>
+	</div>	
+	<div class="col-md-8">
 		<div class="input-group">
 			<input type="text" id="input-search" class="form-control" value="">
 			<span class="input-group-btn">

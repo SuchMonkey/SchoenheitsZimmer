@@ -15,6 +15,8 @@ class TherapyController extends Controller {
 			$this->set("category", $this->Therapy->getCategory($category));
 			$this->set("unit", $this->Therapy->getUnit($unit));
 			$this->set("sections", $this->Therapy->getSections($unit));
+			$this->set("therapyUnitExtras", $this->Therapy->getTherapyUnitActions($category, true));
+			$this->set("therapyUnitActions", $this->Therapy->getTherapyUnitActions($category), false);
 			$this->render($base, "therapyCategoryUnitDetail");
 		} elseif (!is_null($category)) {
 			$this->set("category", $this->Therapy->getCategory($category));
