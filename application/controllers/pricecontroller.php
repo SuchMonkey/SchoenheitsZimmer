@@ -2,6 +2,35 @@
 
 class PriceController extends Controller {
 		
+	public function category() {
+		$this->categoryX(true);
+	}	
+	
+	public function categoryAjax() {
+		$this->categoryX(false);
+	}
+	
+	public function categoryX($base) {
+		$prices = array();
+		$actions = array();
+		
+		$pCategories = $this->Price->getCategories();
+		
+		foreach($pCategories as $pCategory) {
+			
+			$prices[$pCategory["name"]] = $this->Price->getUnits($pCategory["name"]);
+			
+			foreach($prices[$pCategory["name"]] as $_key => $_unit) {
+				$prices[$pCategory["name"]][$_key]["actions"] = $this->Price->getTherapyUnitActions($_unit["name"], false);
+			}
+		}
+		
+		$this->set("generalInformation", $this->Price->getGeneralInformation());
+		$this->set("prices", $prices);
+		$this->render($base, "priceCategoryUnitList");
+	}
+	
+	/*
 	public function category($category = null, $unit = null) {
 		$this->categoryX($category, $unit, true);
 	}	
@@ -30,7 +59,7 @@ class PriceController extends Controller {
 		}
 		
 	}
-	
+	*/
 	public function default_action() {
 		$this->category();
 	}

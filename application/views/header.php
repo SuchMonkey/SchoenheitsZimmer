@@ -2,7 +2,7 @@
 	$helper = new Helper();
 	$menuCategoryList = $helper -> getCategoriesForUrl();
 	$getSocialInformation = $helper -> getSocial();
-	$siteMapLinks = $helper -> getSiteMap();
+	//$siteMapLinks = $helper -> getSiteMap();
 ?>
 <!DOCTYPE html>
 <html lang="de">
@@ -20,10 +20,10 @@
 		<script src="/public/dist/js/jquery.min.js"></script>
 		<script src="/public/dist/js/history.min.js"></script>
 		<script src="/public/dist/js/bootstrap.min.js"></script>
-		<script src="/public/js/main.js"></script>
+		<script src="/public/dist/js/main.min.js"></script>
 		<link rel="stylesheet" href="/public/dist/css/bootstrap.min.css">
 		
-		<link rel="stylesheet" href="/public/dist/css/dropdownonhoover.css">
+		<link rel="stylesheet" href="/public/dist/css/main.css">
 	</head>
 	<body>
 		<?php include(dirname(__FILE__).'/menu.php') ?>

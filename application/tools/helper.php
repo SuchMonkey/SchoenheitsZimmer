@@ -3,15 +3,15 @@
 class Helper extends Model {	
 	
 	public function getCategoriesForUrl() {
-		return $this->query("SELECT name FROM sz.therapys;")->fetchAll();
+		return $this->query("SELECT name FROM therapys;")->fetchAll();
 	}
 	
 	public function getTherapiesForUrl($category) {
-		return $this->query('select tu.name, tu.shortDescription from sz.therapyunits tu, sz.therapys t where tu.therapyid = t.id and lower(t.name) = ?;', array($category))->fetchAll();
+		return $this->query('select tu.name, tu.shortDescription from therapyunits tu, therapys t where tu.therapyid = t.id and lower(t.name) = ? order by t.orderNumber;', array($category))->fetchAll();
 	}
 	
 	public function getSocial() {
-		return $this->query("SELECT name, text from sz.generals where keyName = 'social';")->fetch();
+		return $this->query("SELECT name, text from generals where keyName = 'social';")->fetch();
 	}
 	
 	public function getSiteMap() {

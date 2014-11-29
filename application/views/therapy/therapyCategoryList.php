@@ -19,8 +19,8 @@
 			<div class="col-md-4">
 				<h4 class="kapitaelchen"><?php echo $item['name']; ?></h4>
 				<p>
-					<?php echo $item['shortDescription']; ?>
-					<a href="<?php href('therapy', 'categoryAjax', $item['name']); ?>"> mehr...</a>
+					<?php echo simpleFormat($item['shortDescription']); ?>
+					<a href="<?php href('therapy', 'categoryAjax', $item['name']); ?>" class="internal-link"> mehr...</a>
 				</p>
 			</div>
 		<?php endfor; ?>

@@ -6,12 +6,14 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-2">
-		<h2 class="kapitaelchen"><?php echo $generalInformation['name']; ?></h2>
-	</div>	
-	<div class="col-md-8">
+	<div class="col-md-8 col-md-offset-2">
+		<?php insertImage($generalInformation['imgName'], "img-responsive image-border"); ?>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-8 col-md-offset-2">
 		<div class="input-group">
-			<input type="text" id="input-search" class="form-control" value="">
+			<input type="text" id="input-search" class="form-control">
 			<span class="input-group-btn">
 				<button class="btn btn-link" data-searchhref="<?php href('search', 'searchAjax'); ?>" id="button-search" type="button"><span class="glyphicon glyphicon-search"></span></button>
 			</span>
@@ -22,10 +24,10 @@
 <div class="row">
 	<div class="col-md-8 col-md-offset-2">
 		<h4 class="kapitaelchen">
-			<a href="<?php href($searchResult["hrefParts"]); ?>"><?php echo $searchResult["name"]; ?></a>
+			<a href="<?php href('therapy', 'categoryAjax', $searchResult['categoryname'], $searchResult['therapyunitname']); ?>" class="internal-link"><?php echo $searchResult['therapyunitname']; ?></a>
 		</h4>
 		<p>
-			<?php echo $searchResult["text"]; ?>
+			<?php simpleFormat($searchResult["therapyunittext"], true); ?>
 		</p>
 	</div>
 </div>

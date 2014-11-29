@@ -15,12 +15,18 @@ class TherapyController extends Controller {
 			$this->set("category", $this->Therapy->getCategory($category));
 			$this->set("unit", $this->Therapy->getUnit($unit));
 			$this->set("sections", $this->Therapy->getSections($unit));
-			$this->set("therapyUnitExtras", $this->Therapy->getTherapyUnitActions($category, true));
-			$this->set("therapyUnitActions", $this->Therapy->getTherapyUnitActions($category), false);
+			$this->set("therapyUnitExtras", $this->Therapy->getTherapyUnitActions($unit, true));
+			$this->set("therapyUnitActions", $this->Therapy->getTherapyUnitActions($unit, false));
 			$this->render($base, "therapyCategoryUnitDetail");
 		} elseif (!is_null($category)) {
 			$this->set("category", $this->Therapy->getCategory($category));
-			$this->set("units", $this->Therapy->getUnits($category));
+			$this->set("units", $this->Therapy->getUnits($category, false));
+			
+			$pulledUpUnit = $this->Therapy->getUnits($category, true);
+			if(count($pulledUpUnit) == 1) {
+				$this->set("pulledUpUnit", $pulledUpUnit[0]);
+			}
+			
 			$this->render($base, "therapyCategoryUnitList");
 		} else {
 			

@@ -16,7 +16,7 @@ $(function() {
 	
 	
 	function supports_history_api() {
-		return !!(window.history && history.pushState);
+		return !!!(window.history && history.pushState);
 	}
 	
 	if(supports_history_api()) {
@@ -39,8 +39,8 @@ $(function() {
 			$.get(url, function(data) {
 				$('#pageContent').hide().html(data).fadeIn("fast");
 				
-				$('a').unbind("click",linkHandler);
-				$('a').bind("click",linkHandler);
+				$('a.internal-link').unbind("click",linkHandler);
+				$('a.internal-link').bind("click",linkHandler);
 				
 				$('#button-search').unbind("click",search);
 				$('#button-search').bind("click",search);
@@ -54,6 +54,9 @@ $(function() {
 				$('.big-picture-remover').unbind("click",closeBigPicture);
 				$('.big-picture-remover').bind("click",closeBigPicture);
 				
+				$('.big-picture').unbind("click",closeBigPicture);
+				$('.big-picture').bind("click",closeBigPicture);
+				
 				$('.image-tile-handler').unbind("click",scrollToTop);
 				$('.image-tile-handler').bind("click",scrollToTop);
 				
@@ -61,19 +64,20 @@ $(function() {
 				$("#input-search").bind("keypress",search);
 				
 				$("#input-search").focus();
-				window.setTimeout("$('.scrollTo').goTo()", -50);
+				
+				scrollToTop();
 			});
 		});
 	}
 	
 	// Capture all the links to push their url to the history stack and trigger the StateChange Event
 	
-	$('a').click(linkHandler);
+	$('a.internal-link').click(linkHandler);
 	
 	function linkHandler(evt) {
-		evt.preventDefault();
-		
 		var url = $(this).attr('href');
+		
+		evt.preventDefault();
 		
 		if(url.indexOf("www.") > -1) {
 			$(window).unbind('statechange');
@@ -128,16 +132,15 @@ $(function() {
 	}
 	
 	$('.big-picture-remover').click(closeBigPicture);
+	$('.big-picture').click(closeBigPicture);
 		
 	function closeBigPicture() {
 		$(".big-picture-container").addClass("hidden");
 	}
 	
-	$('.image-tile-handler').click(scrollToTop);
-	
 	function scrollToTop() {
-		$("html, body").animate({ scrollTop: 200 }, "fast");
+		$("html, body").animate({ scrollTop: 0 }, "fast");
 	}
 	
-	window.setTimeout("$('.scrollTo').goTo()", -50);
+	scrollToTop();
 });

@@ -2,6 +2,7 @@
 
 class Search extends Model {
 	public function getSearchResults($searchString) {
+		/*
 		$query = "
 			select id, contextTable as context, name, text from sz.sections
 			where contextTable != 'generals'
@@ -21,6 +22,15 @@ class Search extends Model {
 			select id, 'therapyunits' as context, name, shortdescription from sz.therapyunits
 			where lower(name) like concat('%',replace(:searchString, ' ', '%'),'%')
 			or lower(shortDescription) like concat('%',replace(:searchString, ' ', '%'),'%')
+		";
+		 */
+		$query = "
+			select distinct t.name as categoryname, tu.name as therapyunitname , tu.shortDescription as therapyunittext from therapys t, therapyunits tu
+			where t.id = tu.therapyid
+			and (
+				lower(tu.name) like concat('%',replace(:searchString, ' ', '%'),'%')
+				or lower(tu.shortDescription) like concat('%',replace(:searchString, ' ', '%'),'%')
+			);
 		";
 		
 		return $this->query($query, array(":searchString" => $searchString))->fetchAll();

@@ -11,29 +11,8 @@ class SearchController extends Controller {
 	}
 	
 	public function searchX($searchInput = NULL, $base = true) {
-		if(!is_null($searchInput)) {
-			$results = $this->Search->getSearchResults(strtolower($searchInput));
-			
-			for($i = 0; $i < count($results); $i++) {
-				switch($results[$i]["context"]) {
-					case 'therapyunits':
-						$sectionInfo = $this->Search->getCategoryAndUnitForUnitsSection($results[$i]["id"]);
-						$results[$i]["hrefParts"] = array("therapy","categoryAjax",$sectionInfo["category"],$sectionInfo["unit"]);
-						break;
-					case 'therapyunits':
-						$sectionInfo = $this->Search->getCategoryForTherapy($results[$i]["id"]);
-						$results[$i]["hrefParts"] = array("therapy","categoryAjax",$sectionInfo["category"]);
-						break;
-					case 'therapys':
-						$results[$i]["hrefParts"] = array("therapy","categoryAjax");
-						break;
-					case 'home': case 'about': case 'price':
-						$sectionInfo = $this->Search->getCategoryAndUnitForUnitsSection($results[$i]["id"]);
-						$results[$i]["hrefParts"] = array($results[$i]["context"],$results[$i]["context"]."Ajax");
-						break;
-				}
-			}
-			
+		if(!is_null($searchInput) && strlen($searchInput) >= 3) {
+			$results = $this->Search->getSearchResults(strtolower($searchInput));			
 			
 			$this->set("searchResults", $results);
 		} else {

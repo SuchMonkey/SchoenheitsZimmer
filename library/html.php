@@ -27,10 +27,6 @@ function href() {
 	echo $url;
 }
 
-// surround first letter per word for first lette big stuff...
-function sflpw($text = '') {
-	echo preg_replace("/(\S)(\S+)/u", "<span class='highlight-first-letter'>$1</span>$2", $text);
-}
 
 function insertImage($imageName, $class = "") {
 	
@@ -46,21 +42,52 @@ function getImageUrl($imageName) {
 	return $src;
 }
 
-function simpleFormat($text) {
+function simpleFormat($inputText, $shortenAndNoFormat = false) {
 	$replaceTable = array(
-		"###liststart###" => "<ul>",
-		"###unstyledliststart###" => "<ul class='list-unstyled'>",
-		"###unstyledlistend###" => "</ul>",
-		"###listend###" => "</ul>",
-		"###listitemstart###" => "<li>",
-		"###listitemend###" => "</li>",
-		"###break###" => "<br>",
-		"###strongstart###" => "<strong>",
-		"###strongend###" => "</strong>"
-	);
+			"###liststart###" => "<ul>",
+			"###unstyledliststart###" => "<ul class='list-unstyled'>",
+			"###unstyledlistend###" => "</ul>",
+			"###listend###" => "</ul>",
+			"###listitemstart###" => "<li>",
+			"###listitemend###" => "</li>",
+			"###break###" => "<br>",
+			"###strongstart###" => "<strong>",
+			"###strongend###" => "</strong>",
+			'###emaillinkstart###' => '<a href=',
+			'###emailaddressstart###' => '"mailto:',
+			'###emailaddressend###' => '">',
+			'###emaillinkend###' => '</a>',
+			'###smallstart###' => '<small>',
+			'###smallend###' => '</small>'
+		);
 	
-	foreach($replaceTable as $marker => $entity) {
-		$text = str_replace($marker, $entity, $text);
+	$outputText = "";
+		
+	if($shortenAndNoFormat) {
+		foreach($replaceTable as $marker => $entity) {
+			$inputText = str_replace($marker, " ", $inputText);
+		}
+		
+		$sentence = preg_split('/([^.:!?]+[.:!?]+)/', $inputText, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+		
+		
+		
+		foreach($sentence as $line) {
+			if(strlen($outputText) <= 200 && strlen($outputText . $line) <= 300) {
+				$outputText .= $line;
+			} else {
+				break;
+			}
+		}
+		
+		if(strlen($outputText) <= 100) {
+			$outputText = $inputText;
+		}
+	} else {	
+		foreach($replaceTable as $marker => $entity) {
+			$inputText = str_replace($marker, $entity, $inputText);
+		}
+		$outputText = $inputText;
 	}
-	echo $text;
+	echo $outputText;
 }
